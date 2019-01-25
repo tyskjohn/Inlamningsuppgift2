@@ -3,7 +3,7 @@
   $(function () {
 
     // länk till log-in sidan
-    $("#logOut").click(function() {
+    $("#logOut").click(function () {
       window.location.href = "login.html";
     });
 
@@ -148,41 +148,50 @@
           // select year
           for (var i = 0; i < object.years.length; i++) {
             $("#ticket-year-filter").append(`
-              <a class="dropdown-item" href="#">${object.years[i]}</a>  
+              <option id="filter-year" value="${object.years[i]}" > ${object.years[i]} </option>  
             `)
           }
 
-          for (var i = 0; i < object.tickets.length; i++) {
+          $("#ticket-year-filter").change(function () {
+            var year = $(this).val();
+            $("#ticket-section tr").hide();
+            $("#ticket-section tr:contains('" + year + "')").show();
+          });
 
-            let names = object.tickets[i].fullname.split(" ");
-            let initials = names[0].charAt(0) + names[1].charAt(0);
+          ticketTableList();
 
-            $("#ticket-section").append(`
-                <tr>
-                  <td class="pl-0">
-                    <div class="icon-rounded-primary icon-rounded-md">
-                      <h4 class="font-weight-medium">${initials}</h4>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="mb-0">${object.tickets[i].fullname}</p>
-                    <p class="text-muted mb-0">${object.tickets[i].city}</p>
-                  </td>
-                  <td>
-                    <p class="mb-0">${object.tickets[i].date}</p>
-                    <p class="text-muted mb-0">${object.tickets[i].time}</p>
-                  </td>
-                  <td>
-                    <p class="mb-0">${object.tickets[i].project}</p>
-                    <p class="text-muted mb-0">${object.tickets[i].status}</p>
-                  </td>
-                  <td class="pr-0">
-                    <i class="mdi mdi-dots-horizontal icon-sm cursor-pointer"></i>
-                  </td>
-                </tr>     
-                `)
+          function ticketTableList() {
+            for (var i = 0; i < object.tickets.length; i++) {
+
+              let names = object.tickets[i].fullname.split(" ");
+              let initials = names[0].charAt(0) + names[1].charAt(0);
+  
+              $("#ticket-section").append(`
+                  <tr>
+                    <td class="pl-0">
+                      <div class="icon-rounded-primary icon-rounded-md">
+                        <h4 class="font-weight-medium">${initials}</h4>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="mb-0">${object.tickets[i].fullname}</p>
+                      <p class="text-muted mb-0">${object.tickets[i].city}</p>
+                    </td>
+                    <td>
+                      <p class="mb-0">${object.tickets[i].date}</p>
+                      <p class="text-muted mb-0">${object.tickets[i].time}</p>
+                    </td>
+                    <td>
+                      <p class="mb-0">${object.tickets[i].project}</p>
+                      <p class="text-muted mb-0">${object.tickets[i].status}</p>
+                    </td>
+                    <td class="pr-0">
+                      <i class="mdi mdi-dots-horizontal icon-sm cursor-pointer"></i>
+                    </td>
+                  </tr>     
+                  `)
+            }
           }
-          
 
         }
       };
