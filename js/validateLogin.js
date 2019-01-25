@@ -96,5 +96,4 @@ $(function () {
         $(element).addClass(invalidClass);
         $(element).removeClass(validClass);
     }
-
 });
