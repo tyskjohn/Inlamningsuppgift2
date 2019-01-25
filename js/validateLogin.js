@@ -16,8 +16,9 @@ $(function () {
                     if (username === object.email && password === object.password) {
                         window.location.href = "index.html";
                     } else {
-                        $("body").prepend(`<div id="alert-box"><div class="position-absolute w-100 alert alert-danger text-center" role="alert">Incorrect Username or password</div></div>`);
-                        $("#alert-box").fadeIn("fast").delay(3000).fadeOut("slow");
+                        $("input").addClass("is-invalid");
+                        // $("body").prepend(`<div id="alert-box"><div class="position-absolute w-100 alert alert-danger text-center" role="alert">Incorrect Username or password</div></div>`);
+                        // $("#alert-box").fadeIn("fast").delay(3000).fadeOut("slow");
                     }
                 });
             }
